@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <!-- Enable nullable reference types for better null safety -->
+    <Nullable>enable</Nullable>
+    
+    <!-- Treat warnings as errors to enforce code quality -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    
+    <!-- Enforce code style rules during build -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    
+    <!-- Enable .NET code analyzers for static analysis -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    
+    <!-- Analysis level for latest recommendations -->
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+  <!-- Release-specific optimizations -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <!-- Trim unused code in release builds -->
+    <Trim>true</Trim>
+    
+    <!-- Enable code optimization -->
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+</Project>
