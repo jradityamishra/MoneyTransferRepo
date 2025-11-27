@@ -127,12 +127,12 @@ Access all microservices through the API Gateway using these routes:
 
 ### Gateway Route Mappings
 
-| Gateway URL | Downstream Service | Downstream Port (HTTPS) | Description |
+| Gateway URL | UpStreamtream Service | Downstream Port (HTTPS) | Description |
 |-------------|-------------------|------------------------|-------------|
-| `https://localhost:7000/api/auth/*` | UserMicroservices | 7001 | User authentication & management |
-| `https://localhost:7000/api/account/*` | AccountMicroservices | 7002 | Account operations |
-| `https://localhost:7000/api/transaction/*` | TransactionMicroservices | 7003 | Money transfers & transactions |
-| `https://localhost:7000/api/notification/*` | NotificationMicroservices | 7005 | User notifications |
+| `https://localhost:7000/auth/*` | UserMicroservices | 7001 | User authentication & management |
+| `https://localhost:7000/account/*` | AccountMicroservices | 7002 | Account operations |
+| `https://localhost:7000/transaction/*` | TransactionMicroservices | 7003 | Money transfers & transactions |
+| `https://localhost:7000/notification/*` | NotificationMicroservices | 7005 | User notifications |
 
 ### Example API Calls
 Via API Gateway (Recommended)
