@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-//using UserMicroservices.Model.Entity;
+using TransactionMicroservices.Model.Entity;
+
 namespace UserMicroservices.Data
 {
     public class DatabaseContext : DbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-       
-        //public DbSet<> User { get; set; }
+
+        public DbSet<TransactionSchema> TransactionDB { get; set; }
     }
 }
