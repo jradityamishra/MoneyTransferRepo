@@ -10,11 +10,7 @@ namespace UserMicroservices.Data.Model.Entity
 
         public DateTime? UpdatedAt { get; set; }
     }
-    public enum UserStatus
-    {
-        Active,
-        Inactive
-    }
+ 
 
 }
 
