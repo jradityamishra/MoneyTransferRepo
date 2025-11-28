@@ -5,7 +5,7 @@ namespace AccountMicroservices.Data.ViewModel
     public class ChangeBalanceVM
     {
             [Required]
-            public Guid AccountId { get; set; }
+            public string AccountNumber { get; set; }
 
             [Required]
             public int Amount { get; set; }

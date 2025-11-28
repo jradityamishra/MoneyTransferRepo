@@ -24,9 +24,9 @@ namespace AccountMicroservices.Data.Service
         return await _context.Accounts.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Account?> GetByIdAsync(int id)
+    public async Task<Account?> GetByIdAsync(string accountNumber)
     {
-        return await _context.Accounts.FindAsync(id);
+        return await _context.Accounts.FirstOrDefaultAsync(n=>n.AccountNumber == accountNumber);
     }
 
     public async Task<Account> CreateAsync(Account account)
@@ -38,9 +38,9 @@ namespace AccountMicroservices.Data.Service
         return account;
     }
 
-    public async Task<bool> UpdateAsync(int id, Account updatedAccount)
+    public async Task<bool> UpdateAsync(string accountNo, Account updatedAccount)
     {
-        var existing = await _context.Accounts.FindAsync(id);
+        var existing = await _context.Accounts.FirstOrDefaultAsync(n => n.AccountNumber == accountNo);
         if (existing == null) return false;
 
         existing.UserID = updatedAccount.UserID;
@@ -55,14 +55,27 @@ namespace AccountMicroservices.Data.Service
         return true;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(string accountNumber)
     {
-        var existing = await _context.Accounts.FindAsync(id);
+        var existing = await _context.Accounts.FirstOrDefaultAsync(n=>n.AccountNumber==accountNumber);
         if (existing == null) return false;
 
             _context.Accounts.Remove(existing);
         await _context.SaveChangesAsync();
         return true;
     }
-}
+    public async Task<bool> UpdateBalanceAsync(string accountNo,ChangeBalanceVM changeBalanceVM )
+    {
+        var existing = await _context.Accounts.FirstOrDefaultAsync(n => n.AccountNumber == accountNo);
+        if (existing == null) return false;
+
+        
+        existing.Balance = changeBalanceVM.Amount;
+ 
+
+        _context.Accounts.Update(existing);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    }
 }

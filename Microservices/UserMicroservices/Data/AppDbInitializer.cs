@@ -52,7 +52,7 @@ namespace Banking.Data
                         UserName = adminEmail,
                         Email = adminEmail,
                         EmailConfirmed = true,
-                        Status = UserStatus.Active
+                        Status = "Active"
                     };
 
                     var result = await userManager.CreateAsync(adminUser, adminPassword);

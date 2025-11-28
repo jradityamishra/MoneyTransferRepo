@@ -4,7 +4,7 @@ namespace UserMicroservices.Data.Model.Entity
 {
     public class User : IdentityUser
     {
-        public UserStatus Status { get; set; } = UserStatus.Active;
+        public string Status { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

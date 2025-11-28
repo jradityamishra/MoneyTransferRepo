@@ -67,7 +67,7 @@ namespace Banking.Data.Services
                 Email = model.Email,
                 UserName = string.IsNullOrEmpty(model.UserName) ? model.Email : model.UserName,
                 CreatedAt = DateTime.UtcNow,
-                Status = UserStatus.Active
+                Status = "Active"
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -111,8 +111,7 @@ namespace Banking.Data.Services
             }
 
             if (model.IsActive.HasValue)
-                user.Status = model.IsActive.Value ? UserStatus.Active : UserStatus.Inactive;
-
+                user.Status = model.IsActive.Value ? "Active" : "Inactive";
             user.UpdatedAt = DateTime.UtcNow;
 
             _context.Users.Update(user);

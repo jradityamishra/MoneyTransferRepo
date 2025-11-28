@@ -2,7 +2,7 @@
 {
     public class AccountDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string UserID { get; set; }
         public string AccountNumber { get; set; }
         public string AccountHolderName { get; set; }

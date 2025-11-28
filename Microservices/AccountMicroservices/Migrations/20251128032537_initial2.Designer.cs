@@ -12,8 +12,8 @@ using UserMicroservices.Data;
 namespace AccountMicroservices.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20251127101029_InitialMigration3")]
-    partial class InitialMigration3
+    [Migration("20251128032537_initial2")]
+    partial class initial2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,8 +47,9 @@ namespace AccountMicroservices.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");

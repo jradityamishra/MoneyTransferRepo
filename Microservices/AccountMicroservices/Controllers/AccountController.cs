@@ -9,7 +9,7 @@ namespace AccountMicroservices.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AccountController : ControllerBase
     {
         
@@ -35,10 +35,10 @@ namespace AccountMicroservices.Controllers
         }
 
         // GET: api/account/5
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Account>> GetById(int id)
+        [HttpGet("{accountNumber}")]
+        public async Task<ActionResult<Account>> GetById(string accountNumber)
         {
-            var acc = await _accountService.GetByIdAsync(id);
+            var acc = await _accountService.GetByIdAsync(accountNumber);
             if (acc == null) return NotFound();
             return Ok(acc);
         }
@@ -59,12 +59,17 @@ namespace AccountMicroservices.Controllers
             };
 
             var created = await _accountService.CreateAsync(account);
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            return Ok(new
+            {
+                message = "Account created successfully!",
+                account = created
+            });
+            //return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
         // PUT: api/account/5
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateAccountVM req)
+        [HttpPut("{accountNumber}")]
+        public async Task<IActionResult> Update(string accountNumber, [FromBody] UpdateAccountVM req)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -77,18 +82,29 @@ namespace AccountMicroservices.Controllers
                 Status = req.Status
             };
 
-            var success = await _accountService.UpdateAsync(id, updatedAccount);
+            var success = await _accountService.UpdateAsync(accountNumber, updatedAccount);
             if (!success) return NotFound();
-            return NoContent();
+            return Ok("Account Updated");
         }
 
-        // DELETE: api/account/5
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpPut("update-balance/x  {accountNumber}")]
+        public async Task<IActionResult> UpdateBalance(string accountNumber, [FromBody] ChangeBalanceVM req)
         {
-            var success = await _accountService.DeleteAsync(id);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var success = await _accountService.UpdateBalanceAsync(accountNumber, req);
             if (!success) return NotFound();
-            return NoContent();
+            return Ok("Balance Updated Successfully!");
+        }
+
+
+        // DELETE: api/account/5
+        [HttpDelete("{accountNumber}")]
+        public async Task<IActionResult> Delete(string accountNumber)
+        {
+            var success = await _accountService.DeleteAsync(accountNumber);
+            if (!success) return NotFound();
+            return Ok("Account Deleted Successfully!");
         }
     }
 }

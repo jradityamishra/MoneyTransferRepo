@@ -17,7 +17,7 @@ namespace AccountMicroservices.Data.ViewModel
         [Required]
         public string Currency { get; set; }
 
-        public Account.AccountStatus Status { get; set; }
+        public string Status { get; set; }
 
     }
 }
