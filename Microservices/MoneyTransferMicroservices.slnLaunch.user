@@ -11,11 +11,6 @@
         "Path": "AccountMicroservices\\AccountMicroservices.csproj",
         "Action": "Start",
         "DebugTarget": "https"
-      },
-      {
-        "Path": "OcelotApiGateway\\OcelotApiGateway.csproj",
-        "Action": "Start",
-        "DebugTarget": "https"
       }
     ]
   }
