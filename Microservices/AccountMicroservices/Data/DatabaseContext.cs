@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AccountMicroservices.Data.Model;
+using Microsoft.EntityFrameworkCore;
 //using UserMicroservices.Model.Entity;
 namespace UserMicroservices.Data
 {
@@ -6,7 +7,7 @@ namespace UserMicroservices.Data
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-       
-        //public DbSet<> User { get; set; }
+
+        public DbSet<Account> Accounts { get; set; }
     }
 }
