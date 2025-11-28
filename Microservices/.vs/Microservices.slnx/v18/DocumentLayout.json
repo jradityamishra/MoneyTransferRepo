@@ -3,6 +3,34 @@
   "WorkspaceRootPath": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Services\\TransactionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransactionMicroservices\\Services\\TransactionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Data\\DatabaseContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransactionMicroservices\\Data\\DatabaseContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\IServiceContracts\\ITransactionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransactionMicroservices\\IServiceContracts\\ITransactionService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Controllers\\TransactionController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransactionMicroservices\\Controllers\\TransactionController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Clients\\GatewayClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransactionMicroservices\\Clients\\GatewayClient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Services\\Helper\\Helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransactionMicroservices\\Services\\Helper\\Helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Model\\Entity\\TransactionSchema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:TransactionMicroservices\\Model\\Entity\\TransactionSchema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:UserMicroservices\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -66,11 +94,102 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "DatabaseContext.cs",
+              "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Data\\DatabaseContext.cs",
+              "RelativeDocumentMoniker": "TransactionMicroservices\\Data\\DatabaseContext.cs",
+              "ToolTip": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Data\\DatabaseContext.cs",
+              "RelativeToolTip": "TransactionMicroservices\\Data\\DatabaseContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:26:33.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ITransactionService.cs",
+              "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\IServiceContracts\\ITransactionService.cs",
+              "RelativeDocumentMoniker": "TransactionMicroservices\\IServiceContracts\\ITransactionService.cs",
+              "ToolTip": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\IServiceContracts\\ITransactionService.cs",
+              "RelativeToolTip": "TransactionMicroservices\\IServiceContracts\\ITransactionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:07:07.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Services\\TransactionService.cs",
+              "RelativeDocumentMoniker": "TransactionMicroservices\\Services\\TransactionService.cs",
+              "ToolTip": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Services\\TransactionService.cs",
+              "RelativeToolTip": "TransactionMicroservices\\Services\\TransactionService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAIAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T05:26:14.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Helper.cs",
+              "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Services\\Helper\\Helper.cs",
+              "RelativeDocumentMoniker": "TransactionMicroservices\\Services\\Helper\\Helper.cs",
+              "ToolTip": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Services\\Helper\\Helper.cs",
+              "RelativeToolTip": "TransactionMicroservices\\Services\\Helper\\Helper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T05:26:08.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GatewayClient.cs",
+              "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Clients\\GatewayClient.cs",
+              "RelativeDocumentMoniker": "TransactionMicroservices\\Clients\\GatewayClient.cs",
+              "ToolTip": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Clients\\GatewayClient.cs",
+              "RelativeToolTip": "TransactionMicroservices\\Clients\\GatewayClient.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAC4AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T05:25:51.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TransactionController.cs",
+              "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Controllers\\TransactionController.cs",
+              "RelativeDocumentMoniker": "TransactionMicroservices\\Controllers\\TransactionController.cs",
+              "ToolTip": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Controllers\\TransactionController.cs",
+              "RelativeToolTip": "TransactionMicroservices\\Controllers\\TransactionController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T05:25:27.268Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TransactionSchema.cs",
+              "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Model\\Entity\\TransactionSchema.cs",
+              "RelativeDocumentMoniker": "TransactionMicroservices\\Model\\Entity\\TransactionSchema.cs",
+              "ToolTip": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Model\\Entity\\TransactionSchema.cs",
+              "RelativeToolTip": "TransactionMicroservices\\Model\\Entity\\TransactionSchema.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T06:44:17.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "UserMicroservices.csproj",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\UserMicroservices.csproj",
               "RelativeDocumentMoniker": "UserMicroservices\\UserMicroservices.csproj",
@@ -82,7 +201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Program.cs",
               "RelativeDocumentMoniker": "UserMicroservices\\Program.cs",
@@ -90,12 +209,11 @@
               "RelativeToolTip": "UserMicroservices\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T10:08:44.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T10:08:44.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 20,
               "Title": "StartAllServices.ps1",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\StartAllServices.ps1",
               "RelativeDocumentMoniker": "StartAllServices.ps1",
@@ -107,7 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\NotificationMicroservices\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "NotificationMicroservices\\Properties\\launchSettings.json",
@@ -119,7 +237,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "AccountMicroservices\\Properties\\launchSettings.json",
@@ -131,7 +249,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "ocelot.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\OcelotApiGateway\\ocelot.json",
               "RelativeDocumentMoniker": "OcelotApiGateway\\ocelot.json",
@@ -143,7 +261,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "MoneyTransferMicroservices.sln",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\MoneyTransferMicroservices.sln",
               "RelativeDocumentMoniker": "MoneyTransferMicroservices.sln",
@@ -155,7 +273,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 18,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\TransactionMicroservices\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "TransactionMicroservices\\Properties\\launchSettings.json",
@@ -167,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\OcelotApiGateway\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "OcelotApiGateway\\Properties\\launchSettings.json",
@@ -179,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "UserMicroservices\\Properties\\launchSettings.json",
@@ -191,7 +309,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\OcelotApiGateway\\Program.cs",
               "RelativeDocumentMoniker": "OcelotApiGateway\\Program.cs",
@@ -203,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "OcelotApiGateway.csproj",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\OcelotApiGateway\\OcelotApiGateway.csproj",
               "RelativeDocumentMoniker": "OcelotApiGateway\\OcelotApiGateway.csproj",
@@ -215,7 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "tasks.vs.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\.vs\\tasks.vs.json",
               "RelativeDocumentMoniker": ".vs\\tasks.vs.json",
@@ -227,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\ShivamSingh\\Desktop\\project\\MoneyTransferRepo\\Microservices\\OcelotApiGateway\\appsettings.json",
               "RelativeDocumentMoniker": "OcelotApiGateway\\appsettings.json",
