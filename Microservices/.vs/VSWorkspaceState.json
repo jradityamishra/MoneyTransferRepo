@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\OcelotApiGateway"
+    "\\TransactionMicroservices",
+    "\\TransactionMicroservices\\Controllers",
+    "\\TransactionMicroservices\\Data",
+    "\\TransactionMicroservices\\IServiceContracts",
+    "\\TransactionMicroservices\\Migrations",
+    "\\TransactionMicroservices\\Model"
   ],
-  "SelectedNode": "\\MoneyTransferMicroservices.sln",
+  "SelectedNode": "\\TransactionMicroservices\\Controllers\\TransactionController.cs",
   "PreviewInSolutionExplorer": false
 }
