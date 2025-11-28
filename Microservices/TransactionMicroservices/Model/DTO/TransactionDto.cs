@@ -1,9 +1,9 @@
-﻿
-using TransactionMicroservices.Model.Enums;
-namespace TransactionMicroservices.Model.Entity
+﻿using TransactionMicroservices.Model.Enums;
+namespace TransactionMicroservices.Model.DTO
 {
-    public class TransactionSchema
+    public class TransactionDto
     {
+        
         public Guid Id { get; set; }
         public string FromAccountId { get; set; }
         public string ToAccountId { get; set; }
@@ -18,5 +18,5 @@ namespace TransactionMicroservices.Model.Entity
         public string FailureReason { get; set; }
     }
 
-   
+    
 }

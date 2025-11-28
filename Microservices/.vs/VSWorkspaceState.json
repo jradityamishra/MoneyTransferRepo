@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\TransactionMicroservices",
+    "\\TransactionMicroservices\\Controllers",
+    "\\TransactionMicroservices\\Data",
+    "\\TransactionMicroservices\\IServiceContracts",
+    "\\TransactionMicroservices\\Migrations",
+    "\\TransactionMicroservices\\Model"
+  ],
+  "SelectedNode": "\\TransactionMicroservices\\Controllers\\TransactionController.cs",
+  "PreviewInSolutionExplorer": false
+}
