@@ -9,7 +9,7 @@ namespace AccountMicroservices.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AccountController : ControllerBase
     {
         
@@ -41,6 +41,14 @@ namespace AccountMicroservices.Controllers
             var acc = await _accountService.GetByIdAsync(accountNumber);
             if (acc == null) return NotFound();
             return Ok(acc);
+        }
+
+        [HttpGet("get-account-balance/{accountNumber}")]
+        public async Task<ActionResult<int>> getAccountBalance(string accountNumber)
+        {
+            var account_balacnec = await _accountService.getAccountBalanceAsync(accountNumber);
+      
+            return Ok(account_balacnec);
         }
 
         // POST: api/account
@@ -87,12 +95,23 @@ namespace AccountMicroservices.Controllers
             return Ok("Account Updated");
         }
 
-        [HttpPut("update-balance/x  {accountNumber}")]
+        [HttpPut("update-balance/{accountNumber}")]
         public async Task<IActionResult> UpdateBalance(string accountNumber, [FromBody] ChangeBalanceVM req)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var success = await _accountService.UpdateBalanceAsync(accountNumber, req);
+            if (!success) return NotFound();
+            return Ok("Balance Updated Successfully!");
+        }
+
+
+        [HttpPut("update-status/{accountNumber}")]
+        public async Task<IActionResult> UpdateAccStatus(string accountNumber, [FromBody] UpdateStatus req)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var success = await _accountService.UpdateAccStatus(accountNumber, req);
             if (!success) return NotFound();
             return Ok("Balance Updated Successfully!");
         }

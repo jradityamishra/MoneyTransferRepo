@@ -28,8 +28,13 @@ namespace AccountMicroservices.Data.Service
     {
         return await _context.Accounts.FirstOrDefaultAsync(n=>n.AccountNumber == accountNumber);
     }
+        public async Task<int> getAccountBalanceAsync(string accountNumber)
+        {
+            var _account = await _context.Accounts.FirstOrDefaultAsync(n => n.AccountNumber == accountNumber);
+            return  _account.Balance;
+        }
 
-    public async Task<Account> CreateAsync(Account account)
+        public async Task<Account> CreateAsync(Account account)
     {
         account.CreatedAt = DateTime.UtcNow;
         account.UpdatedAt = DateTime.UtcNow;
@@ -77,5 +82,18 @@ namespace AccountMicroservices.Data.Service
         await _context.SaveChangesAsync();
         return true;
     }
+        public async Task<bool> UpdateAccStatus(string accountNo, UpdateStatus updateStatus)
+        {
+            var existing = await _context.Accounts.FirstOrDefaultAsync(n => n.AccountNumber == accountNo);
+            if (existing == null) return false;
+
+
+            existing.Status = updateStatus.Status;
+
+
+            _context.Accounts.Update(existing);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
