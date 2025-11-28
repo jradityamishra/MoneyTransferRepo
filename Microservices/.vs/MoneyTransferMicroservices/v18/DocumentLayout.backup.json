@@ -1,18 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\SiddharthKadam\\source\\repos\\MoneyTransferRepo\\Microservices\\",
+  "WorkspaceRootPath": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|c:\\users\\siddharthkadam\\source\\repos\\moneytransferrepo\\microservices\\accountmicroservices\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|solutionrelative:accountmicroservices\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|c:\\users\\jyotiradityamishra\\desktop\\project\\moneytransferrepo\\microservices\\usermicroservices\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|solutionrelative:usermicroservices\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|c:\\users\\siddharthkadam\\source\\repos\\moneytransferrepo\\microservices\\accountmicroservices\\data\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|solutionrelative:accountmicroservices\\data\\service\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|c:\\users\\jyotiradityamishra\\desktop\\project\\moneytransferrepo\\microservices\\usermicroservices\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|solutionrelative:usermicroservices\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|c:\\users\\siddharthkadam\\source\\repos\\moneytransferrepo\\microservices\\accountmicroservices\\data\\viewmodel\\updatestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|solutionrelative:accountmicroservices\\data\\viewmodel\\updatestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5555555-5555-5555-5555-555555555555}|OcelotApiGateway\\OcelotApiGateway.csproj|c:\\users\\jyotiradityamishra\\desktop\\project\\moneytransferrepo\\microservices\\ocelotapigateway\\ocelot.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A5555555-5555-5555-5555-555555555555}|OcelotApiGateway\\OcelotApiGateway.csproj|solutionrelative:ocelotapigateway\\ocelot.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|c:\\users\\jyotiradityamishra\\desktop\\project\\moneytransferrepo\\microservices\\usermicroservices\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|solutionrelative:usermicroservices\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Migrations\\20251128060943_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AccountMicroservices\\Migrations\\20251128060943_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|c:\\users\\jyotiradityamishra\\desktop\\project\\moneytransferrepo\\microservices\\accountmicroservices\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2222222-2222-2222-2222-222222222222}|AccountMicroservices\\AccountMicroservices.csproj|solutionrelative:accountmicroservices\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|c:\\users\\jyotiradityamishra\\desktop\\project\\moneytransferrepo\\microservices\\usermicroservices\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A1111111-1111-1111-1111-111111111111}|UserMicroservices\\UserMicroservices.csproj|solutionrelative:usermicroservices\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Migrations\\20251128060727_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:UserMicroservices\\Migrations\\20251128060727_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Migrations\\20251128060516_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:UserMicroservices\\Migrations\\20251128060516_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,41 +58,119 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UpdateStatus.cs",
-              "DocumentMoniker": "C:\\Users\\SiddharthKadam\\source\\repos\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Data\\ViewModel\\UpdateStatus.cs",
-              "RelativeDocumentMoniker": "AccountMicroservices\\Data\\ViewModel\\UpdateStatus.cs",
-              "ToolTip": "C:\\Users\\SiddharthKadam\\source\\repos\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Data\\ViewModel\\UpdateStatus.cs",
-              "RelativeToolTip": "AccountMicroservices\\Data\\ViewModel\\UpdateStatus.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "UserMicroservices\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Controllers\\UserController.cs",
+              "RelativeToolTip": "UserMicroservices\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-28T05:36:13.371Z",
+              "WhenOpened": "2025-11-28T06:20:47.555Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AccountService.cs",
-              "DocumentMoniker": "C:\\Users\\SiddharthKadam\\source\\repos\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Data\\Service\\AccountService.cs",
-              "RelativeDocumentMoniker": "AccountMicroservices\\Data\\Service\\AccountService.cs",
-              "ToolTip": "C:\\Users\\SiddharthKadam\\source\\repos\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Data\\Service\\AccountService.cs",
-              "RelativeToolTip": "AccountMicroservices\\Data\\Service\\AccountService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACEAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-28T05:35:05.856Z",
+              "DocumentIndex": 2,
+              "Title": "ocelot.json",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\OcelotApiGateway\\ocelot.json",
+              "RelativeDocumentMoniker": "OcelotApiGateway\\ocelot.json",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\OcelotApiGateway\\ocelot.json",
+              "RelativeToolTip": "OcelotApiGateway\\ocelot.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-28T06:21:10.256Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\SiddharthKadam\\source\\repos\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "AccountMicroservices\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\SiddharthKadam\\source\\repos\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "AccountMicroservices\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwDIAAAAoAAAAAAAAAA==",
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "UserMicroservices\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Controllers\\AuthController.cs*",
+              "RelativeToolTip": "UserMicroservices\\Controllers\\AuthController.cs*",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAAwFQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-28T05:34:25.159Z",
+              "WhenOpened": "2025-11-28T06:18:08.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Program.cs",
+              "RelativeDocumentMoniker": "UserMicroservices\\Program.cs",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Program.cs",
+              "RelativeToolTip": "UserMicroservices\\Program.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAEQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:12:06.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20251128060943_initial.cs",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Migrations\\20251128060943_initial.cs",
+              "RelativeDocumentMoniker": "AccountMicroservices\\Migrations\\20251128060943_initial.cs",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\Migrations\\20251128060943_initial.cs",
+              "RelativeToolTip": "AccountMicroservices\\Migrations\\20251128060943_initial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:09:43.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\appsettings.json",
+              "RelativeDocumentMoniker": "UserMicroservices\\appsettings.json",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\appsettings.json",
+              "RelativeToolTip": "UserMicroservices\\appsettings.json",
+              "ViewState": "AgIAABIAAAAA54dFysDzvyEAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-28T06:07:55.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20251128060727_initial.cs",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Migrations\\20251128060727_initial.cs",
+              "RelativeDocumentMoniker": "UserMicroservices\\Migrations\\20251128060727_initial.cs",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Migrations\\20251128060727_initial.cs",
+              "RelativeToolTip": "UserMicroservices\\Migrations\\20251128060727_initial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:07:27.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\appsettings.json",
+              "RelativeDocumentMoniker": "AccountMicroservices\\appsettings.json",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\AccountMicroservices\\appsettings.json",
+              "RelativeToolTip": "AccountMicroservices\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-28T06:06:58.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20251128060516_initial.cs",
+              "DocumentMoniker": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Migrations\\20251128060516_initial.cs",
+              "RelativeDocumentMoniker": "UserMicroservices\\Migrations\\20251128060516_initial.cs",
+              "ToolTip": "C:\\Users\\JyotiradityaMishra\\Desktop\\Project\\MoneyTransferRepo\\Microservices\\UserMicroservices\\Migrations\\20251128060516_initial.cs",
+              "RelativeToolTip": "UserMicroservices\\Migrations\\20251128060516_initial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:05:16.499Z",
               "EditorCaption": ""
             }
           ]

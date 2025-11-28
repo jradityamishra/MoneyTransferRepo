@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Banking.Data.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -82,7 +84,7 @@ namespace UserMicroservices.Controllers
             if (user != null && await _userManager.CheckPasswordAsync(user, payload.Password))
             {
                 var token = await GenrateJwtToken(user);
-                return Ok(token);
+                return Ok(new {token,user});
             }
             return Unauthorized();
         }
@@ -140,6 +142,17 @@ namespace UserMicroservices.Controllers
             return response;
 
         }
+
+        [HttpGet("check-user/{id}")]
+        public async Task<IActionResult> CheckUserExists(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            bool exists = user != null;
+            return Ok(new { Exists = exists });
+        }
+
+
+
         private async Task CreateRoleIfNotExists(string roleName)
         {
             var roleExists = await _roleManager.RoleExistsAsync(roleName);

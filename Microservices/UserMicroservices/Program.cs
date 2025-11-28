@@ -67,7 +67,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
-AppDbInitializer.SeedRoles(app);
+AppDbInitializer.SeedRoles(app).Wait();
 AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
 // Configure the HTTP request pipeline.
