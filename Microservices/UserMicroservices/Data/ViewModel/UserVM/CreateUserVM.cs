@@ -15,5 +15,7 @@ namespace UserMicroservices.Data.ViewModel.UserVM
 
         // initial role(s)
         public string[] Roles { get; set; } = new string[0];
+
+       
     }
 }

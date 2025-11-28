@@ -12,8 +12,8 @@ using UserMicroservices.Data;
 namespace AccountMicroservices.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20251128032537_initial2")]
-    partial class initial2
+    [Migration("20251128052103_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
