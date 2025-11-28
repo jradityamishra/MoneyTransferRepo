@@ -13,16 +13,6 @@
         "DebugTarget": "https"
       },
       {
-        "Path": "TransactionMicroservices\\TransactionMicroservices.csproj",
-        "Action": "Start",
-        "DebugTarget": "https"
-      },
-      {
-        "Path": "NotificationMicroservices\\NotificationMicroservices.csproj",
-        "Action": "Start",
-        "DebugTarget": "https"
-      },
-      {
         "Path": "OcelotApiGateway\\OcelotApiGateway.csproj",
         "Action": "Start",
         "DebugTarget": "https"

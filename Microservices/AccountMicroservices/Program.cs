@@ -1,3 +1,4 @@
+using AccountMicroservices.Data.Service;
 using Microsoft.EntityFrameworkCore;
 using UserMicroservices.Data;
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 /**************************DB CONNECTION************************************/
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<AccountService>();
 
 
 var app = builder.Build();
