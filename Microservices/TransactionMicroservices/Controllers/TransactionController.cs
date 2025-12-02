@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TransactionMicroservices.IServiceContracts;
 using TransactionMicroservices.Model.DTO;
@@ -6,6 +7,7 @@ namespace TransactionMicroservices.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "User")]
     public class TransactionController : ControllerBase
 
     {
@@ -25,36 +27,61 @@ namespace TransactionMicroservices.Controllers
 
             try
             {
-                var transaction = await _transactionService.InitiateTransferAsync(request);
+                var result = await _transactionService.InitiateTransferAsync(request);
 
-                if (transaction == null)
+                if (!result.Success)
                 {
-                    return StatusCode(500, "Transaction could not be processed.");
+                    var errorResponse = new 
+                    { 
+                        success = false,
+                        message = result.Message 
+                    };
+
+                    if (result.DebitOperation != null)
+                    {
+                        errorResponse = new
+                        {
+                            success = false,
+                            message = result.Message,
+                            //debitOperation = result.DebitOperation,
+                            //creditOperation = result.CreditOperation
+                        };
+                    }
+
+                    return BadRequest(errorResponse);
                 }
                
-                // Map to DTO if needed
-                var transactionDto = new TransactionDto
+                return Ok(new
                 {
-                    Id = transaction.Id,
-                    FromAccountId = transaction.FromAccountId,
-                    ToAccountId = transaction.ToAccountId,
-                    Amount = transaction.Amount,
-                    Currency = transaction.Currency,
-                    Status = transaction.Status,
-                    Type = transaction.Type,
-                    Description = transaction.Description,
-                    Reference = transaction.Reference,
-                    InitiatedAt = transaction.InitiatedAt,
-                    CompletedAt = transaction.CompletedAt,
-                    FailureReason = transaction.FailureReason
-                };
-
-                return Ok(transactionDto);
+                    success = true,
+                    message = result.Message,
+                    transaction = result.Transaction,
+                    debitOperation = new
+                    {
+                        accountNumber = result.DebitOperation.AccountNumber,
+                        operationType = result.DebitOperation.OperationType,
+                        amount = result.DebitOperation.Amount,
+                        newBalance = result.DebitOperation.NewBalance,
+                        status = result.DebitOperation.Status
+                    },
+                    creditOperation = new
+                    {
+                        accountNumber = result.CreditOperation.AccountNumber,
+                        operationType = result.CreditOperation.OperationType,
+                        amount = result.CreditOperation.Amount,
+                        newBalance = result.CreditOperation.NewBalance,
+                        status = result.CreditOperation.Status
+                    }
+                });
             }
             catch (Exception ex)
             {
                 // Log exception (not shown)
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = $"Internal server error: {ex.Message}"
+                });
             }
         }
 
@@ -75,23 +102,24 @@ namespace TransactionMicroservices.Controllers
                     return NotFound($"Transaction with ID {transactionId} not found.");
                 }
 
-                var transactionDto = new TransactionDto
-                {
-                    Id = transaction.Id,
-                    FromAccountId = transaction.FromAccountId,
-                    ToAccountId = transaction.ToAccountId,
-                    Amount = transaction.Amount,
-                    Currency = transaction.Currency,
-                    Status = transaction.Status,
-                    Type = transaction.Type,
-                    Description = transaction.Description,
-                    Reference = transaction.Reference,
-                    InitiatedAt = transaction.InitiatedAt,
-                    CompletedAt = transaction.CompletedAt,
-                    FailureReason = transaction.FailureReason
-                };
+             //  var transactionDto = new TransactionDto
+              //  {
+                //    Id = transaction.Id,
+                 //   FromAccountId = transaction.FromAccountId,
+                  //  ToAccountId = transaction.ToAccountId,
+                   // Amount = transaction.Amount,
+                  //  Currency = transaction.Currency,
+                  //  Status = transaction.Status,
+                   // Type = transaction.Type,
+                   // Description = transaction.Description,
+                   // Reference = transaction.Reference,
+                  //  InitiatedAt = transaction.InitiatedAt,
+                  //  CompletedAt = transaction.CompletedAt,
+                   // FailureReason = transaction.FailureReason
+               // }
+               // ;
 
-                return Ok(transactionDto);
+                return Ok(transaction);
             }
             catch (Exception ex)
             {
@@ -126,6 +154,49 @@ namespace TransactionMicroservices.Controllers
                 if (transactions == null || !transactions.Any())
                 {
                     return NotFound($"No transactions found for account {accountId}.");
+                }
+
+                return Ok(transactions);
+            }
+            catch (Exception ex)
+            {
+                // Log exception (not shown)
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("account/{accountId}/filtered")]
+        public async Task<ActionResult<IEnumerable<TransactionDto>>> GetFilteredAccountTransactions(
+            string accountId,
+            [FromQuery] string operation,
+            [FromQuery] DateTime? startDate,
+            [FromQuery] DateTime? endDate)
+        {
+            if (string.IsNullOrWhiteSpace(accountId))
+            {
+                return BadRequest("Account ID is required.");
+            }
+
+            // Set default date range if not provided
+            var start = startDate ?? DateTime.UtcNow.AddMonths(-1); // Default: last month
+            var end = endDate ?? DateTime.UtcNow; // Default: now
+
+            if (start > end)
+            {
+                return BadRequest("Start date cannot be after end date.");
+            }
+
+            try
+            {
+                var transactions = await _transactionService.GetFilteredAccountTransactionAsync(
+                    accountId, 
+                    operation, 
+                    start, 
+                    end);
+
+                if (transactions == null || !transactions.Any())
+                {
+                    return NotFound($"No transactions found for account {accountId} with the specified filters.");
                 }
 
                 return Ok(transactions);

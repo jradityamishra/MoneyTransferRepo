@@ -9,7 +9,22 @@
       },
       {
         "Path": "NotificationMicroservices\\NotificationMicroservices.csproj",
-        "Action": "StartWithoutDebugging",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "UserMicroservices\\UserMicroservices.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "AccountMicroservices\\AccountMicroservices.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "OcelotApiGateway\\OcelotApiGateway.csproj",
+        "Action": "Start",
         "DebugTarget": "https"
       }
     ]

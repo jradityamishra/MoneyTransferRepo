@@ -1,5 +1,4 @@
-﻿
-using TransactionMicroservices.Model.Enums;
+﻿using TransactionMicroservices.Model.Enums;
 namespace TransactionMicroservices.Model.Entity
 {
     public class TransactionSchema
@@ -15,7 +14,7 @@ namespace TransactionMicroservices.Model.Entity
         public string Reference { get; set; }
         public DateTime InitiatedAt { get; set; }
         public DateTime? CompletedAt { get; set; }
-        public string FailureReason { get; set; }
+        public string? FailureReason { get; set; }
     }
 
    

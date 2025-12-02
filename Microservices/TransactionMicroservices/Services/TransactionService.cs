@@ -17,7 +17,7 @@ namespace TransactionMicroservices.Services
             _context = db;
             _gatewayClient = gatewayClient;
         }
-        public async Task<TransactionDto> InitiateTransferAsync(TransactionRequest request)
+        public async Task<TransactionResult> InitiateTransferAsync(TransactionRequest request)
         {
             // Basic validation (expand as needed)
             if (request == null ||
@@ -26,33 +26,102 @@ namespace TransactionMicroservices.Services
                 request.Amount <= 0 ||
                 string.IsNullOrWhiteSpace(request.Currency))
             {
-                throw new ArgumentException("Invalid transfer request.");
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Invalid transfer request."
+                };
             }
+            
             //port to be tested
             bool fromAccountExists = await _gatewayClient.ValidateAccountExistsAsync(request.FromAccountId);
             bool toAccountExists = await _gatewayClient.ValidateAccountExistsAsync(request.ToAccountId);
-            if(fromAccountExists)
-                {
-                throw new ArgumentException("From Account does not exist.");
-            }
-            if (toAccountExists)
+            
+            if(!fromAccountExists)
             {
-                throw new ArgumentException("To Account does not exist.");
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "From Account does not exist."
+                };
             }
-            bool fromAccountLocked = await _gatewayClient.LockAccountAsync(request.FromAccountId);
-            bool balanceCheck = await _gatewayClient.CheckBalanceAsync(request.Amount,request.FromAccountId);
+
+            if (!toAccountExists)
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "To Account does not exist."
+                };
+            }
+           
+            bool balanceCheck = await _gatewayClient.CheckBalanceAsync(request.Amount, request.FromAccountId);
             if(!balanceCheck)
             {
-                throw new ArgumentException("Insufficient balance.");
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Insufficient balance."
+                };
             }
-            bool updateFromAccount = await _gatewayClient.UpdateAccountBalanceAsync(request.FromAccountId,request.Amount, "debit");
-            if(!updateFromAccount) {
-                throw new ArgumentException("Failed to debit from account.");
+            
+            // Debit operation
+            var updateFromAccount = await _gatewayClient.UpdateAccountBalanceAsync(request.FromAccountId, request.Amount, "debit");
+            if(!updateFromAccount.Success)
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = updateFromAccount.Message ?? "Failed to debit from account.",
+                    DebitOperation = new OperationDetails
+                    {
+                        AccountNumber = request.FromAccountId,
+                        OperationType = "Debit",
+                        Amount = request.Amount,
+                        Status = "Failed: " + updateFromAccount.Message
+                    }
+                };
             }
-            bool updateToAccount = await _gatewayClient.UpdateAccountBalanceAsync(request.ToAccountId, request.Amount, "credit");
-            if(!updateToAccount) {
-                throw new ArgumentException("Failed to credit to account.");
+            
+            bool fromAccountLocked = await _gatewayClient.LockAccountAsync(request.FromAccountId, "Lock");
+            if (!fromAccountLocked)
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Unable to lock the account for transaction."
+                };
             }
+            
+            // Credit operation
+            var updateToAccount = await _gatewayClient.UpdateAccountBalanceAsync(request.ToAccountId, request.Amount, "credit");
+            if(!updateToAccount.Success)
+            {
+                // Rollback: unlock the from account
+                await _gatewayClient.UnlockAccountAsync(request.FromAccountId, "Unlock");
+                
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = updateToAccount.Message ?? "Failed to credit to account.",
+                    DebitOperation = new OperationDetails
+                    {
+                        AccountNumber = request.FromAccountId,
+                        OperationType = "Debit",
+                        Amount = request.Amount,
+                        NewBalance = updateFromAccount.Balance,
+                        Status = "Completed (Rolled back due to credit failure)"
+                    },
+                    CreditOperation = new OperationDetails
+                    {
+                        AccountNumber = request.ToAccountId,
+                        OperationType = "Credit",
+                        Amount = request.Amount,
+                        Status = "Failed: " + updateToAccount.Message
+                    }
+                };
+            }
+            
             var transaction = new TransactionSchema
             {
                 Id = Guid.NewGuid(),
@@ -60,16 +129,20 @@ namespace TransactionMicroservices.Services
                 ToAccountId = request.ToAccountId,
                 Amount = request.Amount,
                 Currency = request.Currency,
-                Status = TransactionStatus.Initiated,
+                Status = TransactionStatus.Completed,
                 Type = TransactionType.Transfer,
-                Description = request.Description,
+                Description = request.Description ?? string.Empty,
+                Reference = $"TXN-{Guid.NewGuid().ToString().Substring(0, 8).ToUpper()}",
                 InitiatedAt = DateTime.UtcNow,
-                CompletedAt = null,
+                CompletedAt = DateTime.UtcNow,
                 FailureReason = null
             };
 
             _context.TransactionDB.Add(transaction);
             await _context.SaveChangesAsync();
+
+            // Unlock the from account
+            await _gatewayClient.UnlockAccountAsync(request.FromAccountId, "Unlock");
 
             // Map to DTO
             var dto = new TransactionDto
@@ -88,7 +161,39 @@ namespace TransactionMicroservices.Services
                 FailureReason = transaction.FailureReason
             };
 
-            return dto;
+            bool fromAccountUnlocked = await _gatewayClient.LockAccountAsync(request.FromAccountId, "Unlock");
+            if (!fromAccountUnlocked)
+            {
+                return new TransactionResult
+                {
+                    Success = false,
+                    Message = "Unable to Unlock Your Account."
+                };
+            }
+
+
+            return new TransactionResult
+            {
+                Success = true,
+                Message = "Transaction completed successfully",
+                Transaction = dto,
+                DebitOperation = new OperationDetails
+                {
+                    AccountNumber = request.FromAccountId,
+                    OperationType = "Debit",
+                    Amount = request.Amount,
+                    NewBalance = updateFromAccount.Balance,
+                    Status = "Completed"
+                },
+                CreditOperation = new OperationDetails
+                {
+                    AccountNumber = request.ToAccountId,
+                    OperationType = "Credit",
+                    Amount = request.Amount,
+                    NewBalance = updateToAccount.Balance,
+                    Status = "Completed"
+                }
+            };
         }
 
         public async Task<TransactionDto> GetTransactionByIdAsync(Guid transactionId)
@@ -116,7 +221,7 @@ namespace TransactionMicroservices.Services
             };
             return dto;
         }
-        public async Task<IEnumerable<TransactionDto>> GetTransactionsByAccountIdAsync(string accountId, int page, int pageSize)
+        public async Task<IEnumerable<TransactionDto>> GetAccountTransactionsAsync(string accountId, int page, int pageSize)
         {
             if (string.IsNullOrWhiteSpace(accountId) || page <= 0 || pageSize <= 0)
             {
@@ -149,7 +254,63 @@ namespace TransactionMicroservices.Services
                 FailureReason = transaction.FailureReason
             });
         }
+        public async Task<IEnumerable<TransactionDto>> GetFilteredAccountTransactionAsync(string accountId, string operation, DateTime start, DateTime end)
+        {
+            if (string.IsNullOrWhiteSpace(accountId))
+            {
+                return Enumerable.Empty<TransactionDto>();
+            }
 
+            var query = _context.TransactionDB
+                .AsNoTracking()
+                .Where(t => t.InitiatedAt >= start && t.InitiatedAt <= end);
+
+            // Filter by operation type (debit or credit)
+            if (!string.IsNullOrWhiteSpace(operation))
+            {
+                var op = operation.ToLower();
+                if (op == "debit")
+                {
+                    // Debit means money going out from this account
+                    query = query.Where(t => t.FromAccountId == accountId);
+                }
+                else if (op == "credit")
+                {
+                    // Credit means money coming into this account
+                    query = query.Where(t => t.ToAccountId == accountId);
+                }
+                else
+                {
+                    // If operation is invalid or "all", show all transactions for the account
+                    query = query.Where(t => t.FromAccountId == accountId || t.ToAccountId == accountId);
+                }
+            }
+            else
+            {
+                // If no operation specified, show all transactions for the account
+                query = query.Where(t => t.FromAccountId == accountId || t.ToAccountId == accountId);
+            }
+
+            var transactions = await query
+                .OrderByDescending(t => t.InitiatedAt)
+                .ToListAsync();
+
+            return transactions.Select(transaction => new TransactionDto
+            {
+                Id = transaction.Id,
+                FromAccountId = transaction.FromAccountId,
+                ToAccountId = transaction.ToAccountId,
+                Amount = transaction.Amount,
+                Currency = transaction.Currency,
+                Status = transaction.Status,
+                Type = transaction.Type,
+                Description = transaction.Description,
+                Reference = transaction.Reference,
+                InitiatedAt = transaction.InitiatedAt,
+                CompletedAt = transaction.CompletedAt,
+                FailureReason = transaction.FailureReason
+            });
+        }
         public async Task<bool> CancelTransactionAsync(Guid transactionId)
         {
             var transaction = await _context.TransactionDB

@@ -1,8 +1,9 @@
 ﻿namespace TransactionMicroservices.Clients
 {
-    internal class BalanceUpdateRequest
+    public class BalanceUpdateRequest
     {
-        public decimal Amount { get; set; }
-        public string Operation { get; set; }
+       public  string AccountNumber { get; set; }
+        public int Amount { get; set; }
+        public string operation { get; set; }
     }
 }
