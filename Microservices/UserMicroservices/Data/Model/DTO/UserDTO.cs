@@ -1,4 +1,4 @@
-﻿namespace UserMicroservices.Model.DTO
+﻿namespace UserMicroservices.Data.Model.DTO
 {
     public class UserDTO
     {
