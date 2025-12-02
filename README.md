@@ -63,13 +63,12 @@ update-database
    - UserMicroservices
    - AccountMicroservices
    - TransactionMicroservices
-   - NotificationMicroservices
    - OcelotApiGateway
 
 ### 5. Run the Application
 
 Press `F5` in Visual Studio or run:
-dotnet run --project UserMicroservices dotnet run --project AccountMicroservices dotnet run --project TransactionMicroservices dotnet run --project NotificationMicroservices dotnet run --project OcelotApiGateway
+dotnet run --project UserMicroservices dotnet run --project AccountMicroservices dotnet run --project TransactionMicroservices dotnet run --project OcelotApiGateway
 
 
 ## 🌐 Service Endpoints & Port Configuration
@@ -85,7 +84,6 @@ dotnet run --project UserMicroservices dotnet run --project AccountMicroservices
 
 | Protocol | URL | Port | IIS Express Port | SSL Port | Description |
 |----------|-----|------|------------------|----------|-------------|
-| HTTP | `http://localhost:5001` | 5001 | 48532 | - | User service HTTP |
 | HTTPS | `https://localhost:7001` | 7001 | - | 44328 | User service HTTPS |
 | Swagger | `http://localhost:5001/swagger` | 5001 | - | - | API documentation |
 
@@ -93,7 +91,6 @@ dotnet run --project UserMicroservices dotnet run --project AccountMicroservices
 
 | Protocol | URL | Port | IIS Express Port | SSL Port | Description |
 |----------|-----|------|------------------|----------|-------------|
-| HTTP | `http://localhost:5002` | 5002 | 60880 | - | Account service HTTP |
 | HTTPS | `https://localhost:7002` | 7002 | - | 44305 | Account service HTTPS |
 | Swagger | `http://localhost:5002/swagger` | 5002 | - | - | API documentation |
 
@@ -101,23 +98,14 @@ dotnet run --project UserMicroservices dotnet run --project AccountMicroservices
 
 | Protocol | URL | Port | IIS Express Port | SSL Port | Description |
 |----------|-----|------|------------------|----------|-------------|
-| HTTP | `http://localhost:5003` | 5003 | 11432 | - | Transaction service HTTP |
 | HTTPS | `https://localhost:7003` | 7003 | - | 44367 | Transaction service HTTPS |
 | Swagger | `http://localhost:5003/swagger` | 5003 | - | - | API documentation |
 
-### NotificationMicroservices (User Notifications)
-
-| Protocol | URL | Port | IIS Express Port | SSL Port | Description |
-|----------|-----|------|------------------|----------|-------------|
-| HTTP | `http://localhost:5005` | 5005 | 57134 | - | Notification service HTTP |
-| HTTPS | `https://localhost:7005` | 7005 | - | 44310 | Notification service HTTPS |
-| Swagger | `http://localhost:5005/swagger` | 5005 | - | - | API documentation |
 
 ### OcelotApiGateway (API Gateway)
 
 | Protocol | URL | Port | IIS Express Port | SSL Port | Description |
 |----------|-----|------|------------------|----------|-------------|
-| HTTP | `http://localhost:5000` | 5000 | 57901 | - | Gateway HTTP |
 | HTTPS | `https://localhost:7000` | 7000 | - | 44783 | Gateway HTTPS |
 
 ## 🔌 API Gateway Routes
@@ -131,25 +119,22 @@ Access all microservices through the API Gateway using these routes:
 | `https://localhost:7000/auth/*` | UserMicroservices | 7001 | User authentication & management |
 | `https://localhost:7000/account/*` | AccountMicroservices | 7002 | Account operations |
 | `https://localhost:7000/transaction/*` | TransactionMicroservices | 7003 | Money transfers & transactions |
-| `https://localhost:7000/notification/*` | NotificationMicroservices | 7005 | User notifications |
 
 ### Example API Calls
 Via API Gateway (Recommended)
 curl https://localhost:7000/api/auth/login curl https://localhost:7000/api/account/balance curl https://localhost:7000/api/transaction/transfer curl https://localhost:7000/api/notification/status
 Direct Access (Development/Testing)
-curl https://localhost:7001/api/auth/login curl https://localhost:7002/api/account/balance curl https://localhost:7003/api/transaction/transfer curl https://localhost:7005/api/notification/status
+curl https://localhost:7001/api/auth/login curl https://localhost:7002/api/account/balance curl https://localhost:7003/api/transaction/transfer curl 
 
 ## 📊 Port Summary Table
 
-| Service | HTTP Port | HTTPS Port | IIS Express | SSL Port |
-|---------|-----------|------------|-------------|----------|
-| **OcelotApiGateway** | 5000 | 7000 | 57901 | 44783 |
-| **UserMicroservices** | 5001 | 7001 | 48532 | 44328 |
-| **AccountMicroservices** | 5002 | 7002 | 60880 | 44305 |
-| **TransactionMicroservices** | 5003 | 7003 | 11432 | 44367 |
-| **NotificationMicroservices** | 5005 | 7005 | 57134 | 44310 |
+| Service | HTTPS Port | IIS Express | SSL Port |
+|---------|------------|-------------|----------|
+| **OcelotApiGateway** | 7000 | 57901 | 44783 |
+| **UserMicroservices** | 7001 | 48532 | 44328 |
+| **AccountMicroservices** | 7002 | 60880 | 44305 |
+| **TransactionMicroservices** | 7003 | 11432 | 44367 |
 
-> **Note:** Port 5004 is intentionally skipped to avoid previous conflicts.
 
 ## 📁 Project Structure
 
@@ -159,7 +144,6 @@ curl https://localhost:7001/api/auth/login curl https://localhost:7002/api/accou
 - Implement authentication and authorization (JWT recommended)
 - Use API keys or OAuth for gateway access
 - Encrypt sensitive data in configuration files
-- Apply rate limiting to prevent abuse
 
 ## 🧪 Testing
 
@@ -167,10 +151,9 @@ curl https://localhost:7001/api/auth/login curl https://localhost:7002/api/accou
 
 Navigate to Swagger UI for each service:
 
-- User Service: `http://localhost:5001/swagger`
-- Account Service: `http://localhost:5002/swagger`
-- Transaction Service: `http://localhost:5003/swagger`
-- Notification Service: `http://localhost:5005/swagger`
+- User Service: `https://localhost:7001/swagger`
+- Account Service: `https://localhost:7002/swagger`
+- Transaction Service: `https://localhost:7003/swagger`
 
 ### Testing via API Gateway
 
