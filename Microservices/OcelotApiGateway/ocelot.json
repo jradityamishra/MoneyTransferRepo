@@ -21,7 +21,7 @@
           "Port": 7002
         }
       ],
-      "UpstreamPathTemplate": "/accounts/{everything}",
+      "UpstreamPathTemplate": "/account/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
     {

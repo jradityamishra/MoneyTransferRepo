@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-
+﻿using TransactionMicroservices.Model.Enums;
 namespace TransactionMicroservices.Model.Entity
 {
     public class TransactionSchema
@@ -15,25 +14,8 @@ namespace TransactionMicroservices.Model.Entity
         public string Reference { get; set; }
         public DateTime InitiatedAt { get; set; }
         public DateTime? CompletedAt { get; set; }
-        public string FailureReason { get; set; }
+        public string? FailureReason { get; set; }
     }
 
-    public enum TransactionStatus
-    {
-        Initiated,
-        Pending,
-        Processing,
-        Completed,
-        Failed,
-        Cancelled,
-        Reversed
-    }
-
-    public enum TransactionType
-    {
-        Transfer,
-        Deposit,
-        Withdrawal,
-        Refund
-    }
+   
 }
