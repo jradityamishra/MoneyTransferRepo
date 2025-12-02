@@ -9,7 +9,6 @@ This solution consists of 5 microservices orchestrated through an API Gateway:
 - **UserMicroservices** - User authentication and management
 - **AccountMicroservices** - Account creation and management
 - **TransactionMicroservices** - Money transfer and transaction processing
-- **NotificationMicroservices** - User notifications and alerts
 - **OcelotApiGateway** - API Gateway for routing and orchestration
 
 ## 🚀 Technology Stack
