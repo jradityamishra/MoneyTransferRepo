@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace TransactionMicroservices.Migrations
+namespace UserMicroservices.Migrations
 {
     /// <inheritdoc />
-    public partial class createdatabase : Migration
+    public partial class userchange : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

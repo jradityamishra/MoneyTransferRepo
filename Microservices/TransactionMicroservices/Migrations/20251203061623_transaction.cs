@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TransactionMicroservices.Migrations
 {
     /// <inheritdoc />
-    public partial class Intitialsetup : Migration
+    public partial class transaction : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,7 +26,7 @@ namespace TransactionMicroservices.Migrations
                     Reference = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InitiatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CompletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    FailureReason = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FailureReason = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

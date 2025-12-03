@@ -12,7 +12,7 @@ using UserMicroservices.Data;
 namespace UserMicroservices.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20251128074120_user")]
+    [Migration("20251203061509_user")]
     partial class user
     {
         /// <inheritdoc />

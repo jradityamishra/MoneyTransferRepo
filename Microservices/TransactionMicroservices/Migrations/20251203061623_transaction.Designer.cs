@@ -12,8 +12,8 @@ using UserMicroservices.Data;
 namespace TransactionMicroservices.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20251130113028_make changes")]
-    partial class makechanges
+    [Migration("20251203061623_transaction")]
+    partial class transaction
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

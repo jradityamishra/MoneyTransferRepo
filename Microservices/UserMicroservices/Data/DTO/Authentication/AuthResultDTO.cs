@@ -2,7 +2,7 @@
 
 namespace UserMicroservices.Data.ViewModel.Authentication
 {
-    public class AuthResultVM
+    public class AuthResultDTO
     {
         public string Token { get; set; }
         public string  RefreshToken { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace UserMicroservices.Data.ViewModel.Authentication
 {
-    public class TokenRequestVM
+    public class TokenRequestDTO
     {
         public string  Token { get; set; }  
         public string  RefreshToken { get; set; }

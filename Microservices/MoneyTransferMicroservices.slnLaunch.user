@@ -3,18 +3,29 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "TransactionMicroservices\\TransactionMicroservices.csproj",
+        "Path": "OcelotApiGateway\\OcelotApiGateway.csproj",
         "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "UserMicroservices\\UserMicroservices.csproj",
+        "Action": "StartWithoutDebugging",
         "DebugTarget": "https"
       },
       {
         "Path": "AccountMicroservices\\AccountMicroservices.csproj",
-        "Action": "Start",
+        "Action": "StartWithoutDebugging",
         "DebugTarget": "https"
       },
       {
-        "Path": "OcelotApiGateway\\OcelotApiGateway.csproj",
-        "Action": "Start"
+        "Path": "TransactionMicroservices\\TransactionMicroservices.csproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "NotificationMicroservices\\NotificationMicroservices.csproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "https"
       }
     ]
   }

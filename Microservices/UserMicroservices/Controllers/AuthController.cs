@@ -1,6 +1,4 @@
-﻿using Banking.Data.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,14 +15,6 @@ namespace UserMicroservices.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
-        [HttpGet]
-        public IActionResult TestEndpoint()
-        {
-            return Ok("User Microservice is working!");
-        }
-
-
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly DatabaseContext _context;
@@ -41,66 +31,73 @@ namespace UserMicroservices.Controllers
             _context = context;
             _configuration = configuration;
         }
-        [HttpPost("register-user")]
-        public async Task<IActionResult> RegisterUser([FromBody] RegisterVM payload)
-        {
-            //return Ok(new { Status = "Success", Message = payload });
 
+        [HttpGet]
+        public IActionResult TestEndpoint()
+        {
+            return Ok("Authentication Microservice is working!");
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDTO payload)
+        {
             var userExists = await _userManager.FindByNameAsync(payload.Username);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
+            
             User user = new User()
             {
                 Email = payload.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = payload.Username,
             };
+            
             var result = await _userManager.CreateAsync(user, payload.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            // Automatically assign "User" role to all new registrations
+            await _userManager.AddToRoleAsync(user, UserRoles.User);
 
-            switch (payload.Role)
-            {
-                case UserRoles.Admin:
-                    await _userManager.AddToRoleAsync(user, UserRoles.Admin);
-                    break;
-                case UserRoles.User:
-                    await _userManager.AddToRoleAsync(user, UserRoles.User);
-                    break;
-            }
-            return Ok(new { Status = "Success", Message = "User created successfully!" });
+            return Ok(new { Status = "Success", Message = "User registered successfully, please Login!" });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginVM payload)
+        public async Task<IActionResult> Login([FromBody] LoginDTO payload)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             var user = await _userManager.FindByEmailAsync(payload.Email);
             if (user != null && await _userManager.CheckPasswordAsync(user, payload.Password))
             {
-                var token = await GenrateJwtToken(user);
-                return Ok(new {token,user});
+                var token = await GenerateJwtToken(user);
+                return Ok(new { token, user });
             }
-            return Unauthorized();
+            
+            return Unauthorized(new { Status = "Error", Message = "Invalid email or password" });
         }
 
-
-        private async Task<AuthResultVM> GenrateJwtToken(User user)
+        [HttpGet("check-user/{id}")]
+        public async Task<IActionResult> CheckUserExists(string id)
         {
-            // Implementation for generating JWT token
-            // This is a placeholder implementation
-            var authClaims = new List<System.Security.Claims.Claim>
+            var user = await _userManager.FindByIdAsync(id);
+            bool exists = user != null;
+            return Ok(new {user });
+        }
+
+        private async Task<AuthResultDTO> GenerateJwtToken(User user)
+        {
+            var authClaims = new List<Claim>
             {
-                new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, user.UserName),
-                new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.NameIdentifier, user.Id),
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Email,user.Email),
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Sub,user.Email),
-                new System.Security.Claims.Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+              
             };
 
             var userRoles = await _userManager.GetRolesAsync(user);
@@ -116,7 +113,7 @@ namespace UserMicroservices.Controllers
                 expires: DateTime.Now.AddMinutes(1440),
                 claims: authClaims,
                 signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(authSigninKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256)
-                );
+            );
 
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -133,33 +130,13 @@ namespace UserMicroservices.Controllers
             await _context.RefreshTokens.AddAsync(refreshToken);
             await _context.SaveChangesAsync();
 
-            var response = new AuthResultVM()
+            var response = new AuthResultDTO()
             {
                 Token = jwtToken,
                 RefreshToken = refreshToken.Token,
                 ExpiresAt = token.ValidTo
             };
             return response;
-
-        }
-
-        [HttpGet("check-user/{id}")]
-        public async Task<IActionResult> CheckUserExists(string id)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            bool exists = user != null;
-            return Ok(new { Exists = exists });
-        }
-
-
-
-        private async Task CreateRoleIfNotExists(string roleName)
-        {
-            var roleExists = await _roleManager.RoleExistsAsync(roleName);
-            if (!roleExists)
-            {
-                await _roleManager.CreateAsync(new IdentityRole(roleName));
-            }
         }
     }
 }

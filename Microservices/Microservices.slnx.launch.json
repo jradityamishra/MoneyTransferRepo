@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Microservices - Unified Swagger",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-all",
+      "console": "internalConsole",
+      "internalConsoleOptions": "neverOpen",
+      "compounds": [
+        "OcelotApiGateway",
+        "UserMicroservices",
+        "AccountMicroservices", 
+        "TransactionMicroservices",
+        "NotificationMicroservices"
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "All Microservices",
+      "configurations": [
+        "OcelotApiGateway",
+        "UserMicroservices Background",
+        "AccountMicroservices Background",
+        "TransactionMicroservices Background",
+        "NotificationMicroservices Background"
+      ],
+      "preLaunchTask": "build-all",
+      "presentation": {
+        "hidden": false,
+        "group": "microservices",
+        "order": 1
+      }
+    }
+  ]
+}
