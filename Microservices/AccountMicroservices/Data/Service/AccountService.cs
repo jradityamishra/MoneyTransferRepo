@@ -81,7 +81,8 @@ namespace AccountMicroservices.Data.Service
 
             var op = changeBalanceVM.operation?.ToLower();
 
-            if (op == "debit" && existing.Status == "Lock")
+            // Check if account is locked (for debit operations)
+            if (op == "debit" && (existing.Status == "Lock" || existing.Status == "Locked"))
             {
                 return new BalanceUpdateResult
                 {
@@ -90,8 +91,19 @@ namespace AccountMicroservices.Data.Service
                 };
             }
 
-            if (op == "debit" && existing.Status == "Unlock")
+            // Perform the operation
+            if (op == "debit")
             {
+                // Check for sufficient balance
+                if (existing.Balance < changeBalanceVM.Amount)
+                {
+                    return new BalanceUpdateResult
+                    {
+                        Success = false,
+                        Message = "Insufficient balance"
+                    };
+                }
+                
                 existing.Balance = existing.Balance - changeBalanceVM.Amount;
             } 
             else if (op == "credit")
@@ -103,10 +115,11 @@ namespace AccountMicroservices.Data.Service
                 return new BalanceUpdateResult
                 {
                     Success = false,
-                    Message = "Invalid operation"
+                    Message = "Invalid operation. Use 'debit' or 'credit'"
                 };
             }
 
+            existing.UpdatedAt = DateTime.UtcNow;
             _context.Accounts.Update(existing);
             await _context.SaveChangesAsync();
             

@@ -1,0 +1,1206 @@
+{
+	"info": {
+		"_postman_id": "money-transfer-microservices-001",
+		"name": "Money Transfer Microservices",
+		"description": "Complete API collection for Money Transfer Microservices Application including User, Account, Transaction, and Notification services via Ocelot API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "money-transfer-v1"
+	},
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Test Auth Service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/auth",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('registered_username', pm.request.body.raw ? JSON.parse(pm.request.body.raw).Username : '');",
+									"    pm.test('User registered successfully', function() {",
+									"        pm.expect(response.Status).to.eql('Success');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Username\": \"john_doe\",\n  \"Email\": \"john.doe@example.com\",\n  \"Password\": \"Password@123\",\n  \"Role\": \"User\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/auth/register-user",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"auth",
+								"register-user"
+							]
+						},
+						"description": "Register a new user. Role can be 'User' or 'Admin'"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('auth_token', response.token.token);",
+									"    pm.environment.set('refresh_token', response.token.refreshToken);",
+									"    pm.environment.set('user_id', response.user.id);",
+									"    ",
+									"    pm.test('Login successful', function() {",
+									"        pm.expect(response.token.token).to.exist;",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Email\": \"john.doe@example.com\",\n  \"Password\": \"Password@123\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/auth/login",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with email and password. Returns JWT token."
+					},
+					"response": []
+				},
+				{
+					"name": "Check User Exists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/auth/check-user/{{user_id}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"auth",
+								"check-user",
+								"{{user_id}}"
+							]
+						},
+						"description": "Check if a user exists by user ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication endpoints for user registration and login"
+		},
+		{
+			"name": "2. User Management",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/user/get-all-users",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"get-all-users"
+							]
+						},
+						"description": "Get list of all users (Requires authentication)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/user/user-by-{{user_id}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"user-by-{{user_id}}"
+							]
+						},
+						"description": "Get user details by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/user/user-by-email?email=john.doe@example.com",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"user-by-email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "john.doe@example.com"
+								}
+							]
+						},
+						"description": "Get user by email address"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserName\": \"jane_doe\",\n  \"Email\": \"jane.doe@example.com\",\n  \"Password\": \"Password@123\",\n  \"PhoneNumber\": \"+1234567890\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/user/create-user",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"create-user"
+							]
+						},
+						"description": "Create a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserName\": \"john_doe_updated\",\n  \"Email\": \"john.updated@example.com\",\n  \"PhoneNumber\": \"+9876543210\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/user/update-user/{{user_id}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"update-user",
+								"{{user_id}}"
+							]
+						},
+						"description": "Update user details"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/user/delete-user/{{user_id}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"delete-user",
+								"{{user_id}}"
+							]
+						},
+						"description": "Delete a user"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserId\": \"{{user_id}}\",\n  \"CurrentPassword\": \"Password@123\",\n  \"NewPassword\": \"NewPassword@123\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/user/change-password",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"change-password"
+							]
+						},
+						"description": "Change user password"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Email\": \"john.doe@example.com\",\n  \"Token\": \"reset_token_here\",\n  \"NewPassword\": \"NewPassword@123\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/user/reset-password",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"reset-password"
+							]
+						},
+						"description": "Reset user password using token"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserId\": \"{{user_id}}\",\n  \"Role\": \"Admin\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/user/assign-role",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"assign-role"
+							]
+						},
+						"description": "Assign a role to user"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserId\": \"{{user_id}}\",\n  \"Role\": \"Admin\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/user/remove-role",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"user",
+								"remove-role"
+							]
+						},
+						"description": "Remove a role from user"
+					},
+					"response": []
+				}
+			],
+			"description": "User management endpoints"
+		},
+		{
+			"name": "3. Account Management",
+			"item": [
+				{
+					"name": "Test Account Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/account/test",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Accounts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/account",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account"
+							]
+						},
+						"description": "Get all accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account By Number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('account_number', response.accountNumber);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/account/{{account_number}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account",
+								"{{account_number}}"
+							]
+						},
+						"description": "Get account by account number"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/account/get-account-balance/{{account_number}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account",
+								"get-account-balance",
+								"{{account_number}}"
+							]
+						},
+						"description": "Get account balance by account number"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('account_number', response.account.accountNumber);",
+									"    pm.environment.set('from_account', response.account.accountNumber);",
+									"    ",
+									"    pm.test('Account created successfully', function() {",
+									"        pm.expect(response.message).to.include('successfully');",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserID\": \"{{user_id}}\",\n  \"AccountNumber\": \"ACC1001\",\n  \"Balance\": 10000,\n  \"Currency\": \"USD\",\n  \"Status\": \"Active\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/account",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account"
+							]
+						},
+						"description": "Create a new account"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Second Account (for testing transfers)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('to_account', response.account.accountNumber);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserID\": \"{{user_id}}\",\n  \"AccountNumber\": \"ACC1002\",\n  \"Balance\": 5000,\n  \"Currency\": \"USD\",\n  \"Status\": \"Active\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/account",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account"
+							]
+						},
+						"description": "Create a second account for testing transfers"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserID\": \"{{user_id}}\",\n  \"AccountNumber\": \"{{account_number}}\",\n  \"Balance\": 15000,\n  \"Currency\": \"USD\",\n  \"Status\": \"Active\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/account/{{account_number}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account",
+								"{{account_number}}"
+							]
+						},
+						"description": "Update account details"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account Balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"AccountNumber\": \"{{account_number}}\",\n  \"Amount\": 500,\n  \"operation\": \"credit\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/account/update-balance/{{account_number}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account",
+								"update-balance",
+								"{{account_number}}"
+							]
+						},
+						"description": "Update account balance. Operation can be 'credit' or 'debit'"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"AccountNumber\": \"{{account_number}}\",\n  \"Status\": \"Locked\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/account/update-status/{{account_number}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account",
+								"update-status",
+								"{{account_number}}"
+							]
+						},
+						"description": "Update account status. Status can be 'Active', 'Locked', 'Closed', etc."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/account/{{account_number}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"account",
+								"{{account_number}}"
+							]
+						},
+						"description": "Delete an account"
+					},
+					"response": []
+				}
+			],
+			"description": "Account management endpoints"
+		},
+		{
+			"name": "4. Transactions",
+			"item": [
+				{
+					"name": "Initiate Transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    if (response.transaction) {",
+									"        pm.environment.set('transaction_id', response.transaction.id);",
+									"    }",
+									"    pm.test('Transfer successful', function() {",
+									"        pm.expect(response.success).to.be.true;",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"FromAccountId\": \"{{from_account}}\",\n  \"ToAccountId\": \"{{to_account}}\",\n  \"Amount\": 500,\n  \"Currency\": \"USD\",\n  \"Description\": \"Payment for services\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_url}}/transaction/transfer",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"transaction",
+								"transfer"
+							]
+						},
+						"description": "Initiate a money transfer between two accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/transaction/{{transaction_id}}",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"transaction",
+								"{{transaction_id}}"
+							]
+						},
+						"description": "Get transaction details by transaction ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Transactions (Paginated)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/transaction/account/{{account_number}}?page=1&pageSize=20",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"transaction",
+								"account",
+								"{{account_number}}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "20"
+								}
+							]
+						},
+						"description": "Get all transactions for an account with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Filtered Account Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/transaction/account/{{account_number}}/filtered?operation=credit&startDate=2024-01-01&endDate=2024-12-31",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"transaction",
+								"account",
+								"{{account_number}}",
+								"filtered"
+							],
+							"query": [
+								{
+									"key": "operation",
+									"value": "credit",
+									"description": "Operation type: credit or debit"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-01-01",
+									"description": "Start date for filtering"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31",
+									"description": "End date for filtering"
+								}
+							]
+						},
+						"description": "Get filtered transactions by operation type and date range"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/transaction/{{transaction_id}}/cancel",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"transaction",
+								"{{transaction_id}}",
+								"cancel"
+							]
+						},
+						"description": "Cancel a pending transaction"
+					},
+					"response": []
+				}
+			],
+			"description": "Transaction management endpoints"
+		},
+		{
+			"name": "5. Notifications",
+			"item": [
+				{
+					"name": "Test Notification Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_url}}/notification",
+							"host": [
+								"{{gateway_url}}"
+							],
+							"path": [
+								"notification"
+							]
+						},
+						"description": "Test notification service availability"
+					},
+					"response": []
+				}
+			],
+			"description": "Notification service endpoints"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Global pre-request script",
+					"console.log('Request to: ' + pm.request.url.toString());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Global test script",
+					"pm.test('Response time is less than 5000ms', function() {",
+					"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+					"});",
+					"",
+					"pm.test('Status code is not 500', function() {",
+					"    pm.expect(pm.response.code).to.not.equal(500);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gateway_url",
+			"value": "https://localhost:7000",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "account_number",
+			"value": "ACC1001",
+			"type": "string"
+		},
+		{
+			"key": "from_account",
+			"value": "ACC1001",
+			"type": "string"
+		},
+		{
+			"key": "to_account",
+			"value": "ACC1002",
+			"type": "string"
+		},
+		{
+			"key": "transaction_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
