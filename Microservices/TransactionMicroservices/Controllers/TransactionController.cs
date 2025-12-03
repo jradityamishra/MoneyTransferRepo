@@ -7,7 +7,7 @@ namespace TransactionMicroservices.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "User")]
+    //[Authorize(Roles = "User")]
     public class TransactionController : ControllerBase
 
     {
@@ -208,31 +208,8 @@ namespace TransactionMicroservices.Controllers
             }
         }
 
-        [HttpPost("{transactionId}/cancel")]
-        public async Task<ActionResult> CancelTransaction(Guid transactionId)
-        {
-            if (transactionId == Guid.Empty)
-            {
-                return BadRequest("Invalid transaction ID.");
-            }
+        
 
-            try
-            {
-                var result = await _transactionService.CancelTransactionAsync(transactionId);
-
-                if (!result)
-                {
-                    return NotFound($"Transaction with ID {transactionId} could not be cancelled or was not found.");
-                }
-
-                return Ok($"Transaction with ID {transactionId} has been cancelled.");
-            }
-            catch (Exception ex)
-            {
-                // Log exception (not shown)
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-
-        }
+        
     }
 }

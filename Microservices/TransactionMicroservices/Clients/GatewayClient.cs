@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
 using System.Net;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using TransactionMicroservices.Model;
@@ -9,19 +10,49 @@ namespace TransactionMicroservices.Clients
 {
     public class GatewayClient
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<GatewayClient> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         
-        public GatewayClient(IHttpClientFactory httpClient, ILogger<GatewayClient> logger)
+        public GatewayClient(IHttpClientFactory httpClientFactory, ILogger<GatewayClient> logger, IHttpContextAccessor httpContextAccessor)
         {
-            _httpClient = httpClient.CreateClient("ApiGateway");
+            _httpClientFactory = httpClientFactory;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        private HttpClient GetAuthenticatedHttpClient()
+        {
+            var httpClient = _httpClientFactory.CreateClient("ApiGateway");
+            
+            // Get the token from the current request's Authorization header
+            var authHeader = _httpContextAccessor.HttpContext?.Request.Headers["Authorization"].FirstOrDefault();
+            if (!string.IsNullOrEmpty(authHeader))
+            {
+                // Forward the bearer token to the gateway
+                if (authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+                {
+                    var token = authHeader.Substring("Bearer ".Length).Trim();
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                }
+                else
+                {
+                    httpClient.DefaultRequestHeaders.Add("Authorization", authHeader);
+                }
+            }
+            
+            return httpClient;
         }
         
         public async Task<bool> ValidateAccountExistsAsync(string accountNumber)
-        { 
-            var response = await _httpClient.GetAsync($"/account/{accountNumber}");
-           
+        {
+            _logger.LogInformation("Validating account: {AccountNumber}", accountNumber);
+            
+            var httpClient = GetAuthenticatedHttpClient();
+            var response = await httpClient.GetAsync($"/account/{accountNumber}");
+            
+            _logger.LogInformation("Account validation response: {StatusCode}", response.StatusCode);
+            
             if (response.IsSuccessStatusCode)
                 return true;
 
@@ -29,7 +60,8 @@ namespace TransactionMicroservices.Clients
             if (response.StatusCode == HttpStatusCode.NotFound)
                 return false;
 
-            // For any other error -> throw or handle
+            // For any other error -> log and return false
+            _logger.LogWarning("Account validation failed with status: {StatusCode}", response.StatusCode);
             return false;
         }
 
@@ -49,8 +81,10 @@ namespace TransactionMicroservices.Clients
                 "application/json"
             );
 
-            var response = await _httpClient.PutAsync($"/account/update-status/{accountNumber}", content);
-            _logger.LogInformation("Lock account response: {Response}", response.StatusCode);
+            var httpClient = GetAuthenticatedHttpClient();
+            var response = await httpClient.PutAsync($"/account/update-status/{accountNumber}", content);
+            
+            _logger.LogInformation("Lock account response: {StatusCode}", response.StatusCode);
             
             return response.IsSuccessStatusCode;
         }
@@ -58,8 +92,14 @@ namespace TransactionMicroservices.Clients
 
         public async Task<bool> CheckBalanceAsync(decimal Amount, string accountNumber)
         {
-            var response = await _httpClient.GetAsync($"/account/get-account-balance/{accountNumber}");
-            if (!response.IsSuccessStatusCode) return false;
+            var httpClient = GetAuthenticatedHttpClient();
+            var response = await httpClient.GetAsync($"/account/get-account-balance/{accountNumber}");
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogWarning("Check balance failed: {StatusCode}", response.StatusCode);
+                return false;
+            }
 
             var result = await response.Content.ReadAsStringAsync();
             var currentBalance = decimal.Parse(result);
@@ -82,7 +122,8 @@ namespace TransactionMicroservices.Clients
                 "application/json"
             );
 
-            var response = await _httpClient.PutAsync($"account/update-balance/{accountNumber}", content);
+            var httpClient = GetAuthenticatedHttpClient();
+            var response = await httpClient.PutAsync($"account/update-balance/{accountNumber}", content);
             
             if (response.IsSuccessStatusCode)
             {
@@ -139,7 +180,9 @@ namespace TransactionMicroservices.Clients
                 "application/json"
             );
 
-            var response = await _httpClient.PutAsync($"/account/update-status/{accountNumber}", content);
+            var httpClient = GetAuthenticatedHttpClient();
+            var response = await httpClient.PutAsync($"/account/update-status/{accountNumber}", content);
+            
             return response.IsSuccessStatusCode;
         }
     }

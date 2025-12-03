@@ -9,7 +9,8 @@ namespace AccountMicroservices.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    [Authorize(Roles = "User")]
+    //[Authorize(Roles = "User")]
+    //[Authorize(Roles = "User")]
     public class AccountController : ControllerBase
     {
         
